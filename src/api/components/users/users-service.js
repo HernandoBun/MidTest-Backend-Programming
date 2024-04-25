@@ -10,20 +10,22 @@ async function getUsers(pageNumber, pageSize, sort, search) {
   // Parsing query
   const page_number = parseInt(pageNumber) || 1;
   const page_size = parseInt(pageSize) || 10;
-  const sortParams = parseSortParams(sort);
-  const searchParams = parseSearchParams(search);
+  const sortParams = parseSortFunction(sort);
+  const searchParams = parseSearchFunction(search);
 
   return await usersRepository.getUsers(page_number, page_size, sortParams, searchParams);
 }
 
-function parseSortParams(sortQuery) {
-  if (!sortQuery) return { email: 1 }; // Default sorting by email ascending
+function parseSortFunction(sortQuery) {
+  if (!sortQuery) 
+    return { email: 1 }; //  sorting email ascending
   const [field, order] = sortQuery.split(':');
   return { [field]: order === 'desc' ? -1 : 1 };
 }
 
-function parseSearchParams(searchQuery) {
-  if (!searchQuery) return {};
+function parseSearchFunction(searchQuery) {
+  if (!searchQuery) 
+    return {};
   const [field, key] = searchQuery.split(':');
   return { [field]: { $regex: key, $options: 'i' } }; // Case insensitive search
 }

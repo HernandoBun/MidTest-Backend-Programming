@@ -17,8 +17,6 @@ async function login(request, response, next) {
   const { email, password } = request.body;
 
   try {
-    
-    
     // Periksa apakah email ini telah mencapai batas percobaan login
     if (cobaLogin[email] && cobaLogin[email].attempts >= MAX_LOGIN_ATTEMPTS) {
       const timeLeft = Math.ceil((LOGIN_ATTEMPT_WINDOW - (Date.now() - cobaLogin[email].lastAttempt)) / 1000 / 60); // Menit

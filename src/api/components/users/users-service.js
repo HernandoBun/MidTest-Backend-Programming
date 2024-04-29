@@ -20,7 +20,14 @@ function parseSortFunction(sortQuery) {
   if (!sortQuery) 
     return { email: 1 }; //  sorting email ascending
   const [field, order] = sortQuery.split(':');
-  return { [field]: order === 'desc' ? -1 : 1 }; // ternary operasi
+  const result = {};
+  if (order === 'desc') {
+      result[field] = -1;
+  } else {
+      result[field] = 1;
+  }
+  return result;
+  
 }
 
 function parseSearchFunction(searchQuery) {

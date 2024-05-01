@@ -9,6 +9,7 @@ module.exports = () => {
 
   authentication(app);
   users(app);
+  products(app);
 
   return app;
 };

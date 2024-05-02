@@ -1,4 +1,4 @@
-const { category } = require('../../../models/products-schema');
+const { name, category, price } = require('../../../models/products-schema');
 const productsRepository = require('./products-repository');
 
 /**
@@ -10,12 +10,12 @@ async function getProducts() {
 
   const results = [];
   for (let i = 0; i < products.length; i += 1) {
-    const products = products[i];
+    const productItem = products[i];
     results.push({
-      id: products.id,
-      name: products.name,
-      category: products.category,
-      price: products.price,
+      id: productItem.id,
+      name: productItem.name,
+      category: productItem.category,
+      price: productItem.price,
     });
   }
 
@@ -28,7 +28,7 @@ async function getProducts() {
  * @returns {Object}
  */
 async function getProduct(id) {
-  const product = await usersRepository.getProduct(id);
+  const product = await productsRepository.getProduct(id);
 
   // User not found
   if (!product) {
@@ -51,14 +51,12 @@ async function getProduct(id) {
  * @returns {boolean}
  */
 async function createProduct(name, category, price) {
-  
   try {
-    await usersRepository.createProduct(name, category, price);
+    await productsRepository.createProduct(name, category, price);
+    return true;
   } catch (err) {
-    return null;
+    return false;
   }
-
-  return true;
 }
 
 /**
@@ -108,11 +106,10 @@ async function deleteProduct(id) {
   return true;
 }
 
-
 module.exports = {
   getProducts,
   getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
-}
+};

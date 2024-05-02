@@ -34,11 +34,11 @@ async function getProduct(request, response, next) {
 // create product
 async function createProduct(request, response, next) {
   try {
-    const name = request.body.id;
-    const category = request.body.id;
-    const price = request.body.id;
+    const name = request.body.name;
+    const category = request.body.category;
+    const price = request.body.price;
 
-    const work = await productsService.createProduct(id, name, category, price);
+    const work = await productsService.createProduct(name, category, price);
     if (!work) {
       throw errorResponder(
         errorTypes.UNPROCESSABLE_ENTITY,
@@ -46,7 +46,7 @@ async function createProduct(request, response, next) {
       );
     }
 
-    return response.status(200).json({ name, email });
+    return response.status(200).json({ name, category, price });
   } catch (error) {
     return next(error);
   }
@@ -93,3 +93,11 @@ async function deleteProduct(request, response, next) {
     return next(error);
   }
 }
+
+module.exports = {
+  getProducts,
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};

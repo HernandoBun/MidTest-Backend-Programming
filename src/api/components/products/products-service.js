@@ -15,7 +15,12 @@ async function getProducts() {
       id: productItem.id,
       name: productItem.name,
       category: productItem.category,
+      description: productItem.description,
       price: productItem.price,
+      location: productItem.location,
+      sold: productItem.sold,
+      stock: productItem.stock,
+      createDate: productItem.createDate,
     });
   }
 
@@ -50,9 +55,9 @@ async function getProduct(id) {
  * @param {number} price - Price
  * @returns {boolean}
  */
-async function createProduct(name, category, price) {
+async function createProduct(name, category, description, price, location, sold, stock, createDate) {
   try {
-    await productsRepository.createProduct(name, category, price);
+    await productsRepository.createProduct(name, category, description, price, location, sold, stock, createDate);
     return true;
   } catch (err) {
     return false;

@@ -1,5 +1,6 @@
 const productsService = require('./products-service');
 const { errorResponder, errorTypes } = require('../../../core/errors');
+const { createDate } = require('../../../models/products-schema');
 
 // get all products
 async function getProducts(request, response, next) {
@@ -36,9 +37,14 @@ async function createProduct(request, response, next) {
   try {
     const name = request.body.name;
     const category = request.body.category;
+    const description = request.body.description;
     const price = request.body.price;
+    const location = request.body.location;
+    const sold = request.body.sold;
+    const stock = request.body.stock;
+    const createDate = request.body.stock;
 
-    const work = await productsService.createProduct(name, category, price);
+    const work = await productsService.createProduct(name, category, description, price, location, sold, stock, createDate);
     if (!work) {
       throw errorResponder(
         errorTypes.UNPROCESSABLE_ENTITY,
@@ -46,7 +52,7 @@ async function createProduct(request, response, next) {
       );
     }
 
-    return response.status(200).json({ name, category, price });
+    return response.status(200).json({ name, category, description, price, location, sold, stock, createDate });
   } catch (error) {
     return next(error);
   }

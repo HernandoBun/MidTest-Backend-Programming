@@ -13,11 +13,16 @@ async function getProduct(id){
 }
 
 // create products
-async function createProduct(name, category, price) {
+async function createProduct(name, category, description, price, location, sold, stock, createDate) {
   return Product.create({
     name,
-    category,
-    price,
+    category, 
+    description, 
+    price, 
+    location, 
+    sold, 
+    stock, 
+    createDate
   });
 }
 

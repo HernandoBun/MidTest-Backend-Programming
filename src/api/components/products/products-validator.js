@@ -20,4 +20,12 @@ module.exports = {
         price:  joi.number().required().label('Price'),
       },
     },
+
+    updateProductStock: {
+      body: {
+        name: joi.string().min(1).max(100).required().label('Name'),
+        stock: joi.number().default(0).label('Stock'),
+      },
+    },
+    
 };

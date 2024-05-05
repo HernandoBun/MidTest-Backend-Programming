@@ -21,17 +21,26 @@ module.exports = (app) => {
     );
 
 
-   // Get user detail
+   // Get product detail
    route.get('/:id', authenticationMiddleware, productsController.getProduct);
 
 
-    // Update user
+    // Update 
    route.put(
     '/:id',
     authenticationMiddleware,
     celebrate(productsValidator.updateProduct),
     productsController.updateProduct
   );
+
+  //update products stock
+  route.put(
+    '/:id/update-stock',
+    authenticationMiddleware,
+    celebrate(productsValidator.updateProductStock),
+    productsController.updateProductStock
+  );
+
 
   // Delete user
   route.delete('/:id',

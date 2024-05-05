@@ -1,5 +1,6 @@
 const { propertyOf } = require('lodash');
 const { Product } = require('../../../models');
+const { stock } = require('../../../models/products-schema');
 
 
 // untuk get semua products
@@ -41,6 +42,20 @@ async function updateProduct(id, name, price){
   );
 }
 
+async function updateProductStock(id, name, updateProductStock){
+  return Product.updateOne(
+    {
+      _id: id,
+    },
+   {
+    $set: {
+      name,
+      stock,
+    },
+  }
+  );
+}
+
 
 // create function delete Product
 async function deleteProduct(id){
@@ -53,5 +68,6 @@ module.exports = {
   getProduct,
   createProduct,
   updateProduct,
+  updateProductStock,
   deleteProduct,
 };

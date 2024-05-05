@@ -77,7 +77,27 @@ async function updateProduct(request, response, next) {
       );
     }
 
-    return response.status(200).json({ id });
+    return response.status(200).json({ id , name , price});
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function updateProductStock(request, response, next) {
+  try {
+    const id = request.params.id;
+    const name = request.body.name;
+    const stock = request.body.stock;
+
+    const work = await productsService.updateProduct(id, name, stock);
+    if (!work) {
+      throw errorResponder(
+        errorTypes.UNPROCESSABLE_ENTITY,
+        'Failed to Update Product'
+      );
+    }
+
+    return response.status(200).json({ id, name, stock });
   } catch (error) {
     return next(error);
   }
@@ -108,5 +128,6 @@ module.exports = {
   getProduct,
   createProduct,
   updateProduct,
+  updateProductStock,
   deleteProduct,
 };

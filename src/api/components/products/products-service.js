@@ -89,6 +89,23 @@ async function updateProduct(id, name, price) {
   return true;
 }
 
+async function updateProductStock(id, name, stock) {
+  const product = await productsRepository.getProduct(id);
+
+  // User not found
+  if (!product) {
+    return null;
+  }
+
+  try {
+    await productsRepository.updateProduct(id, name, stock);
+  } catch (err) {
+    return null;
+  }
+
+  return true;
+}
+
 /**
  * Delete user
  * @param {string} id - product ID
@@ -116,5 +133,6 @@ module.exports = {
   getProduct,
   createProduct,
   updateProduct,
+  updateProductStock,
   deleteProduct,
 };

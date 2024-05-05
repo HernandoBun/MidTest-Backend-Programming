@@ -1,8 +1,3 @@
-// const productsSchema = {
-//   name: String,
-//   category: String,
-//   price: Number,
-// };
 const productsSchema = {
   name: String,
   category: String,
@@ -14,7 +9,9 @@ const productsSchema = {
   stock: {
     type: Number, default:0},
   createDate: {
-    type: Date, default: Date.now},
+      type: Date,
+      default: Date.now 
+  },
 };
 
 module.exports = productsSchema;

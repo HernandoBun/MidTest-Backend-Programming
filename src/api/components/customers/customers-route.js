@@ -20,7 +20,7 @@ module.exports = (app) => {
     customersController.createCustomer
   );
 
-  route.put('/:id', // Endpoint untuk memperbarui nomor telepon pelanggan berdasarkan ID
+  route.put('/:id/phone-number', // Endpoint untuk memperbarui nomor telepon pelanggan berdasarkan ID
     authenticationMiddleware,
     celebrate(customersValidator.updateCustomerPNumber), // Menggunakan validator untuk update nomor telepon
     customersController.updateCustomerPNumber // Menggunakan controller  untuk update nomor telepon

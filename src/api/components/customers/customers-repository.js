@@ -15,7 +15,7 @@ async function getCustomer(id){
 
 // create customer
 async function createCustomer(firstName, lastName, email, password, phoneNumber, address, createDate ) {
-  return Product.create({
+  return Customer.create({
     firstName,
     lastName,
     email, 

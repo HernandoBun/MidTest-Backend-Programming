@@ -3,6 +3,7 @@ const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function getCustomers(request, response, next) {
   try {
+
     const customers = await customersService.getCustomers(); 
     return response.status(200).json(customers);
   } catch (error) {
@@ -32,9 +33,9 @@ async function createCustomer(request, response, next) {
   try {
     const { firstName, lastName, email, password, phoneNumber, address, createDate } = request.body;
 
-    const newCustomer = customersService.createCustomer(firstName, lastName, email, password, phoneNumber, address, createDate);
+    const newCustomer = await customersService.createCustomer(firstName, lastName, email, password, phoneNumber, address, createDate);
 
-    return response.status(201).json(newCustomer);
+    return response.status(200).json({firstName, lastName, email, password, phoneNumber, address, createDate});
   } catch (error) {
     return next(error);
   }

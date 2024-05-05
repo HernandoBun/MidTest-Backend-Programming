@@ -5,7 +5,10 @@ const { createDate } = require('../../../models/products-schema');
 // get all products
 async function getProducts(request, response, next) {
   try {
-    const products = await productsService.getProducts();
+    const search_name = request.query.search_name;
+    const search_category = request.query.search_category;
+
+    const products = await productsService.getProducts(search_name,search_category);
 
     return response.status(200).json(products);
   } catch (error) {

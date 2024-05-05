@@ -81,7 +81,7 @@ async function updateProduct(id, name, price) {
   }
 
   try {
-    await productsRepository.updateProduct(id, name, email);
+    await productsRepository.updateProduct(id, name, price);
   } catch (err) {
     return null;
   }
